@@ -30,6 +30,15 @@ const dataMapper = {
         }
         const result = await client.query(query);
         return result.rows;
+    },
+
+    async getById(id) {
+        const query = {
+            text: `select * from recette where id = $1`,
+            values: [id]
+        }
+        const result = await client.query(query);
+        return result.rows[0];
     }
 }
 

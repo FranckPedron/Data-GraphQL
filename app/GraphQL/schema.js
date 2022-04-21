@@ -3,12 +3,13 @@ const { gql } = require('apollo-server');
 const schema = gql `
 type Recette {
     id: ID!
-    name: String
+    name: String!
+    ingredients: [Ingredient]
 }
 
 type Ingredient {
     id: ID!
-    label: String
+    label: String!
     recettes: [Recette]
 }
 
@@ -17,7 +18,10 @@ type Query {
     "Liste des recettes"
     recettes: [Recette]
 
-    "Ingrédients d'une recette"
+    "Une recette par son id"
+    recette(id: ID!): Recette
+
+    "Liste des ingredients"
     ingredients: [Ingredient]
 
 }
