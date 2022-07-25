@@ -1,0 +1,68 @@
+### Liste des recettes
+POST http://localhost:3000/graphql HTTP/1.1
+Content-Type: application/json
+X-Request-Type: GraphQL
+
+query {
+  recettes {
+  name
+}
+}
+
+
+### les ingrédients d'une recette
+POST http://localhost:3000/graphql HTTP/1.1
+Content-Type: application/json
+X-Request-Type: GraphQL
+
+query Recette($recetteId: ID!) {
+recette(id: $recetteId) {
+ingredients {
+name
+}
+}
+}
+
+{
+"recetteId": 1
+}
+
+###
+
+### les recettes dans lesquelles il y a un ingrédient spécifique
+
+POST http://localhost:3000/graphql HTTP/1.1
+Content-Type: application/json
+X-Request-Type: GraphQL
+
+query Recette($ingredientId: ID!) {
+recette(id: $recetteId) {
+ingredients {
+name
+}
+}
+}
+
+{
+"recetteId": 1
+}
+
+###
+
+# les recettes dans lesquelles il y a un ingrédient spécifique
+
+POST http://localhost:3000/graphql HTTP/1.1
+Content-Type: application/json
+X-Request-Type: GraphQL
+
+query Ingredient($ingredientName: String!) {
+recette(id: $recetteId) {
+ingredients {
+name
+}
+}
+}
+
+{
+"name": "Citron vert"
+}

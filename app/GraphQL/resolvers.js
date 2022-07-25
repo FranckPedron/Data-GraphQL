@@ -1,31 +1,29 @@
-const recetteDB = require('../model/recetteDB');
-const ingredientDB = require('../model/ingredientDB')
-
 module.exports = {
     Query: {
-        recettes() {
-            return recetteDB.getAll();
+        recettes(_,__,{dataSources}){
+            console.log(dataSources);
+            return dataSources.recette.getRecettes();
         },
-
-        recette(_,args) {
-            return recetteDB.getById(args.id)
+        recette( _, args,{dataSources}){
+            return dataSources.recette.getRecetteById(args.id);
         },
-
-        ingredients() {
-            return ingredientDB.getAll();
-        }
-
-    },
-
-    Ingredient: {
-        recettes(parent) {
-            return recetteDB.recetteByIngredientID(parent.id);
+        ingredient(_,args,{dataSources}){
+            return dataSources.ingredient.getIngredientByName(args.name);
         }
     },
-
     Recette: {
-        ingredients(parent) {
-            return ingredientDB.getIngredientByRecetteId(parent.id);
+        ingredients(parent,_,{dataSources}){
+            console.log(parent);
+            return dataSources.ingredient.getIngredientsByRecetteId(parent.id);
+        },
+        image(_,__,{dataSources}){
+            return dataSources.image.getImage();
+        }
+    },
+    Ingredient: {
+        recettes(parent,_,{dataSources}){
+            console.log(parent);
+            return dataSources.recette.getRecettesByIngredientName(parent.name);
         }
     }
 };

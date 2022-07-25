@@ -1,30 +1,38 @@
-const { gql } = require('apollo-server');
+/**
+ * Le fichier de schéma va nous permettre de définir les types qui vont être pris en compte par GraphQL
+ *
+ */
+const { gql } = require("apollo-server");
 
-const schema = gql `
-type Recette {
-    id: ID!
-    name: String!
-    ingredients: [Ingredient]
-}
+const schema = gql`
 
-type Ingredient {
-    id: ID!
-    label: String!
-    recettes: [Recette]
-}
+    type Recette{
+        id: ID!
+        name: String!
 
-type Query {
-    
-    "Liste des recettes"
-    recettes: [Recette]
+        ingredients: [Ingredient]
+        image: Image
+    }
 
-    "Une recette par son id"
-    recette(id: ID!): Recette
+    type Ingredient{
+        id: ID!
+        name: String!
 
-    "Liste des ingredients"
-    ingredients: [Ingredient]
+        recettes: [Recette]
+    }
 
-}
-`
+    type Image{
+        url: String!
+    }
 
-module.exports=schema;
+    type Query{
+        recettes: [Recette]
+        recette(id: ID!): Recette
+
+        ingredient(name: String!): Ingredient
+    }
+
+`;
+
+
+module.exports = schema;
