@@ -9,8 +9,3 @@
 - remonter toutes les recettes
 - remonter les ingrédients d'une recette
 - remonter les recettes dans lesquelles il y a un ingrédient spécifique
-
-## Bonus
-
-Dormir
-
